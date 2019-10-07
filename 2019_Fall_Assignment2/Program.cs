@@ -391,21 +391,49 @@ namespace _2019_Fall_Assignment2
                 //Checking for constriants
                 
                 //initializing count c
-                int c = 0;
-                
-                if(keyboard.Any(char.IsLower) &&  keyboard.Length == 26 && word.Any(char.IsLower) && (word.Length <= 10 || word.Length >= 1))
+                //int c = 0;
+
+                char[] lstc = word.ToCharArray();
+
+                //int c = 0;
+                int klen = keyboard.Length - 1;
+
+                Dictionary<String, String> d = new Dictionary<string, string>();
+                if (keyboard.Any(char.IsLower) && keyboard.Length == 26 && word.Any(char.IsLower) && (word.Length <= 10 || word.Length >= 1))
                 {
-                    //Only one for loop, Hence satisfying the time complexity of O(n)
-                    for (int i = 0; i < word.Length; i++)
+                    Dictionary<char, int> dict = new Dictionary<char, int>();
+
+                    int char_value = 0;
+
+                    foreach (char c in keyboard)
                     {
-                        //Checking and adding the sum
-                        c += keyboard.IndexOf(word[i]);
+                        dict.Add(c, char_value++);
                     }
-                    Console.WriteLine("Count is : " + c);
+
+                    int time = 0;
+                    int prev_char_value = 0;
+
+                    foreach (char c in word)
+                    {
+                        //Console.WriteLine(c);
+                        if (dict[c] > prev_char_value)
+                        {
+                            time = time + (dict[c] - prev_char_value);
+                        }
+                        else if (dict[c] < prev_char_value)
+                        {
+                            time = time + (prev_char_value - dict[c]);
+                        }
+                        else { }
+                        prev_char_value = dict[c];
+                    }
+                    Console.WriteLine("");
+                    Console.WriteLine(time);
                 }
+
                 else
                 {
-                Console.WriteLine("Please enter valid Input");
+                    Console.WriteLine("Please enter valid Input");
                 }
             }
             catch
