@@ -449,55 +449,48 @@ namespace _2019_Fall_Assignment2
         {
             try
             {
-                int rlen = matrix.GetLength(0);
-                int clen = matrix.GetLength(1);
+                int rows = matrix.GetLength(0);
+                int columns = matrix.GetLength(1);
 
                 //Console.WriteLine(rlen);
                 //Checking for rows then columns.
-                for (int i = 0; i < matrix.GetLength(0); i++)
-                {
-                    for (int j = 0; j < matrix.GetLength(1); j++)
-                    {
-                        //put a single value
-                        //Console.Write(string.Format("{0} ", matrix[i, j]));
-                        //Console.WriteLine();
-                        //checking for constraints
-                        if((rlen <= 20 || rlen >= 1) && (matrix[i,j] == 0 || matrix[i,j] == 1))
-                        {
-                            int l = 0, r = matrix.GetLength(1) - 1;
-                            var t = matrix[i, l];
+               
+                            int[,] B = new int[rows, columns];
 
-                            while (l < r)
+
+                            for (int i = 0; i < rows; i++)
                             {
-                            matrix[i, l] = matrix[i, r];
-                            matrix[i, r] = t;
-                            l++; r--;
-                            }
-                            //Replacing the values
-                            if (matrix[i,j] == 1)
-                            {
-                                matrix[i, j] = 0;
-                            }
-                            else
-                            {
-                                matrix[i, j] = 1;
+                                columns = matrix.GetLength(1);
+                                for (int j = 0; j < columns; j++)
+                                {
+                                    if ((rows <= 20 || rows >= 1) && (columns <= 20 || columns >= 1) && (matrix[i, j] == 0 || matrix[i, j] == 1))
+                                    {
+                                        columns--;
+                                        B[i, j] = 1 - (matrix[i, columns]);
+                                        B[i, columns] = 1 - (matrix[i, j]);
+
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Please enter valid Input");
+                                    }
+                                }
                             }
 
-                            //Console.WriteLine(matrix[i, j]);
+                            foreach (int item in B)
+                            {
+                                Console.WriteLine(item + " ");
+                            }
+                        
 
-                            Console.Write(matrix[i, j]);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Please enter valid Input");
-                        }
+                        
 
 
-                    }
+                    
                     //to print the output in matrix format
-                    Console.Write(Environment.NewLine + Environment.NewLine);
+                    //Console.Write(Environment.NewLine + Environment.NewLine);
    
-                }
+                
                             
                       
                                     
