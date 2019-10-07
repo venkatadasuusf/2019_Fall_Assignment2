@@ -540,12 +540,7 @@ namespace _2019_Fall_Assignment2
                 for (int i = 1; i < start.Length; i++)
                 {
                     //checking constraint
-                    if (start[i] >= end[i])
-                    {
-                                Console.WriteLine("Invalid Input");
-                    }
-                    else
-                    {
+
                         room = 0;
                         for (int j = 1; j <= (minrooms.Count); j++)
                         {
@@ -557,7 +552,7 @@ namespace _2019_Fall_Assignment2
                             
                             }
                         }
-                    }
+                    
 
                     if (room == 0)
                     {
