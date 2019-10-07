@@ -399,7 +399,7 @@ namespace _2019_Fall_Assignment2
                 int klen = keyboard.Length - 1;
 
                 Dictionary<String, String> d = new Dictionary<string, string>();
-                if (keyboard.Any(char.IsLower) && keyboard.Length == 26 && word.Any(char.IsLower) && (word.Length <= 10 || word.Length >= 1))
+                if (keyboard.All(char.IsLower) && keyboard.Length == 26 && word.All(char.IsLower) && (word.Length <= 10 || word.Length >= 1))
                 {
                     Dictionary<char, int> dict = new Dictionary<char, int>();
 
