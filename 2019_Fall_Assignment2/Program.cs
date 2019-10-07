@@ -603,7 +603,8 @@ namespace _2019_Fall_Assignment2
                 Console.WriteLine("Exception occured while computing SortedSquares()");
             }
 
-            return new int[] { };
+            //return new int[] { };
+            return A;
         }
 
         public static bool ValidPalindrome(string s)
