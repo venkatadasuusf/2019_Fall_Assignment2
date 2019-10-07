@@ -101,27 +101,50 @@ namespace _2019_Fall_Assignment2
 
                 // END Question # 3
 
+                // START Question # 4
+
                 string keyboard = "abcdefghijklmnopqrstuvwxyz";
                 string word = "cba";
+
+                Console.WriteLine("***** Question # 4 Output *****");
+                Console.WriteLine("");
                 Console.WriteLine("Time taken to type with one finger = {0}\n", CalculateTime(keyboard, word));
 
+                // END Question # 4
+
+                // START Question # 5
                 int[,] matrix = { { 1, 1, 0 }, { 1, 0, 1 }, { 0, 0, 0 } };
                 int[,] flipAndInvertedImage = FlipAndInvertImage(matrix);
+                Console.WriteLine("***** Question # 5 Output *****");
+                Console.WriteLine("");
                 Console.WriteLine("The resulting flipped and inverted image is:\n");
                 Display2DArray(flipAndInvertedImage);
                 Console.Write("\n");
+                // END Question # 5
 
+                // START Question # 6
                 int[,] intervals = { { 0, 30 }, { 5, 10 }, { 15, 20 } };
                 int minMeetingRooms = MinMeetingRooms(intervals);
+                Console.WriteLine("***** Question # 6 Output *****");
+                Console.WriteLine("");
                 Console.WriteLine("Minimum meeting rooms needed = {0}\n", minMeetingRooms);
+                // END Question # 6
 
+                // START Question # 7
                 int[] arr = { -4, -1, 0, 3, 10 };
                 int[] sortedSquares = SortedSquares(arr);
-                Console.WriteLine("Squares of the array in sorted order is:");
+                Console.WriteLine("***** Question # 7 Output *****");
+                Console.WriteLine("");
+                Console.Write("Squares of the array in sorted order is:");
                 DisplayArray(sortedSquares);
+                Console.WriteLine("");
                 Console.Write("\n");
+                // END Question # 7
 
+                // START Question # 8
                 string s = "abca";
+                Console.WriteLine("***** Question # 8 Output *****");
+                Console.WriteLine("");
                 if (ValidPalindrome(s))
                 {
                     Console.WriteLine("The given string \"{0}\" can be made PALINDROME", s);
@@ -130,6 +153,8 @@ namespace _2019_Fall_Assignment2
                 {
                     Console.WriteLine("The given string \"{0}\" CANNOT be made PALINDROME", s);
                 }
+                Console.WriteLine("");
+                // END Question # 8
 
             }   // End of try
 
@@ -379,6 +404,7 @@ namespace _2019_Fall_Assignment2
             return -1;
         }
         // End of LargestUniqueNumber
+                
 
         public static int CalculateTime(string keyboard, string word)
         {
@@ -477,22 +503,7 @@ namespace _2019_Fall_Assignment2
                                 }
                             }
 
-                            foreach (int item in B)
-                            {
-                                Console.WriteLine(item + " ");
-                            }
-                        
-
-                        
-
-
-                    
-                    //to print the output in matrix format
-                    //Console.Write(Environment.NewLine + Environment.NewLine);
-   
-                
-                            
-                      
+                return B;
                                     
             }
             catch
@@ -517,7 +528,6 @@ namespace _2019_Fall_Assignment2
                     end[i] = intervals[i, 1];
 
                 }
-
 
                 //Sorting two arrays
                 Array.Sort(start);
@@ -554,7 +564,8 @@ namespace _2019_Fall_Assignment2
 
                 }
 
-                Console.WriteLine(minrooms.Count);
+                return minrooms.Count;
+                
             }
             catch
             {
@@ -631,8 +642,81 @@ namespace _2019_Fall_Assignment2
         {
             try
             {
-                // Write your code here
+                //checking the string will only contain lowercase characters a-z. The maximum length of the string is 50000
+                if (s.All(char.IsLower) && (s.Length > 0 && s.Length <= 50000))
+                {
+                    //Reversing the input string s and storing it in s_reverse
+                    string s_reverse = new string(s.Reverse().ToArray());
+
+
+                    //Initial check if s and s_reverse are the same (palindrome), and return true
+                    if (s == s_reverse)
+                    {
+
+                        return true;
+                    }
+
+                    // Else checking if deleting maximum one character from the string will make it palindrome
+                    else
+                    {
+
+
+                        int i = s.Length - 1;
+                        int start_ind = 0;
+                        int end_ind = s.Length - 1;
+
+                        while (start_ind <= end_ind)
+                        {
+
+                            //Comparing starting charcter with ending character, and continuing the loop
+                            if ((s[start_ind] == s[end_ind]))
+                            {
+                                start_ind++;
+                                end_ind--;
+                            }
+
+                            //Checking if deleting one character makes the string palindrome
+                            else
+                            {
+
+                                //Checking if deleting ending character makes the string palindrome
+                                string updated_input_string = new string(s.Remove(end_ind, 1));
+                                string updated_input_reverse_string = new string(updated_input_string.Reverse().ToArray());
+
+                                if (updated_input_string == updated_input_reverse_string)
+                                {
+
+                                    return true;
+
+                                }
+
+                                else
+                                {
+                                    //Checking if deleting starting character makes the string palindrome
+                                    string updated_input_string1 = new string(s.Remove(start_ind, 1));
+                                    string updated_input_reverse_string1 = new string(updated_input_string1.Reverse().ToArray());
+
+                                    if (updated_input_string1 == updated_input_reverse_string1)
+                                    {
+                                        return true;
+                                    }
+
+                                }
+                                //incrementing starting index; Decrementing ending index
+                                start_ind++;
+                                end_ind--;
+                            }
+
+                        }   //End while
+
+                    }
+                }
+                else
+                {
+                    return false;
+                }
             }
+
             catch
             {
                 Console.WriteLine("Exception occured while computing ValidPalindrome()");
