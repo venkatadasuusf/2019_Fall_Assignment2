@@ -551,7 +551,52 @@ namespace _2019_Fall_Assignment2
         {
             try
             {
-                // Write your code here
+                int n = A.Length;
+                // first dived array into part negative and positive  
+                int k;
+                for (k = 0; k < n; k++)
+                {
+                    if (A[k] >= 0)
+                        break;
+                }
+                // Now do the same process that we learn  
+                // in merge sort to merge to two sorted array  
+                // here both two half are sorted and we traverse  
+                // first half in reverse meaner because  
+                // first half contains negative element  
+                int i = k - 1; // Initial index of first half  
+                int j = k; // Initial index of second half  
+                int ind = 0; // Initial index of temp array
+
+                int[] temp = new int[n];
+                while (i >= 0 && j < n)
+                {
+                    if (A[i] * A[i] < A[j] * A[j])
+                    {
+                        temp[ind] = A[i] * A[i];
+                        i--;
+                    }
+                    else
+                    {
+                        temp[ind] = A[j] * A[j];
+                        j++;
+                    }
+                    ind++;
+                }
+                while (i >= 0)
+                {
+                    temp[ind++] = A[i] * A[i];
+                    i--;
+                }
+                while (j < n)
+                {
+                    temp[ind++] = A[j] * A[j];
+                    j++;
+                }
+
+                // copy 'temp' array into original array  
+                for (int x = 0; x < n; x++)
+                    A[x] = temp[x];
             }
             catch
             {
